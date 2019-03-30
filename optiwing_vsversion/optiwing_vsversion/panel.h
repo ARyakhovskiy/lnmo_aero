@@ -9,8 +9,8 @@ public:
 	panel();
 	panel(point p1, point p2);
 	const point getCenter();
-	const point getAngle();
-	const point getLenght();
-
+	const double getAngle();
+	const double getLenght();
+	const point getPoint();
 	~panel();
 };

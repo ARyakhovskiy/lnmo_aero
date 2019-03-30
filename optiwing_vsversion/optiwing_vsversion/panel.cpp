@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "panel.h"
-#include "cmath"
+#include "math.h"
 
 panel::panel()
 {
@@ -22,19 +22,32 @@ const point panel::getCenter()
 	centerY = 0.5*(left.y + right.y);
 	return point(centerX, centerY);
 }
-const point panel::getAngle()
+const double panel::getAngle()
 {
 	double angle;
 	angle = atan((right.y - left.y) / (right.x - left.x));
-	
+	return angle;
 }
-const point panel::getLenght()
+const double panel::getLenght()
 {
 	double lenght;
-	lenght =sqrt( (left.y - right.y)^2 + (right.x - left.x)^2);
-	
+	lenght =sqrt( (left.y - right.y)*(left.y - right.y) + (right.x - left.x)*(right.x - left.x));
+	return lenght;
 }
-
+ /*const point panel::getPoint()
+{
+	int a;
+	cin >>a;
+	char *str1[] =new char[a];
+	for (int i = 0; i < a; i++) {
+		cin >> str1[i];
+	}
+	ofstream fout("name.txt");
+	fout << str1; 
+	fout.close();
+	
+	return 0;
+}*/
 
 panel::~panel()
 {
