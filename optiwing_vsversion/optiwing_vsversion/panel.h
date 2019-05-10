@@ -1,6 +1,6 @@
 #pragma once
 #include "point.h"
-
+#include <iostream>
 class panel
 {
 public:
@@ -11,6 +11,7 @@ public:
 	const point getCenter();
 	const double getAngle();
 	const double getLenght();
-	const point getPoint();
+	void out(std::ofstream& streamOut);
+
 	~panel();
 };

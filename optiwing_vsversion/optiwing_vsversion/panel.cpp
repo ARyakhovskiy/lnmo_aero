@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "panel.h"
 #include "math.h"
+#include <iostream> 
+#include <fstream> 
 
 panel::panel()
 {
@@ -15,39 +17,35 @@ panel::panel(point p1, point p2)
 	right = p2;
 }
 
-const point panel::getCenter()
+const point panel::getCenter()//центр панели
 {
 	double centerX, centerY;
 	centerX = 0.5*(left.x + right.x);
 	centerY = 0.5*(left.y + right.y);
 	return point(centerX, centerY);
 }
-const double panel::getAngle()
+const double panel::getAngle()//угол между панелью и осью Х
 {
 	double angle;
 	angle = atan((right.y - left.y) / (right.x - left.x));
 	return angle;
 }
-const double panel::getLenght()
+const double panel::getLenght()//длина панели
 {
 	double lenght;
 	lenght =sqrt( (left.y - right.y)*(left.y - right.y) + (right.x - left.x)*(right.x - left.x));
 	return lenght;
 }
- /*const point panel::getPoint()
+  
+void panel ::out(std::ofstream& streamOut)//вывод координат панели
 {
-	int a;
-	cin >>a;
-	char *str1[] =new char[a];
-	for (int i = 0; i < a; i++) {
-		cin >> str1[i];
-	}
-	ofstream fout("name.txt");
-	fout << str1; 
-	fout.close();
 	
-	return 0;
-}*/
+	
+
+	streamOut << "("<<left.x << " "<<left.y<<") "<< "(" << right.x << " " << right.y << ");\n";
+
+
+}
 
 panel::~panel()
 {
