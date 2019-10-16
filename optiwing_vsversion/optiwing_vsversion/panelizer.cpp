@@ -7,11 +7,16 @@
 #include <iostream> 
 #include <fstream> 
 #include <string>
+#include <vector>
+#include <regex>
 
 using namespace std;
 
+const char* path = "C:\\Users\\Александр\\source\\repos\\panelizer\\panelizer\\data.txt";
+
 //Карелин 19.04: Реализовать чтение из файла массива точек для создания экземпляра
 //класса airfoil + проверка замкнутости (и другие методы)
+
 panel* pointsToPanels(point* points)//Из точек делаем панели
 {
 	const int n = 10;
@@ -28,26 +33,53 @@ panel* pointsToPanels(point* points)//Из точек делаем панели
 
 		panels[i] = panel(p[i], p[i + 1]);
 		panels[i].out(fout);
-
+		
 	}
 	panels[n - 1] = panel(p[n - 1], p[0]);
 	panels[n - 1].out(fout);
 
 
 	fout.close();
+	return &panel(point(1,2), point(2,2));
 }
 
-point* PointsToMass() 
+
+std::vector<std::string> split(const string& input, const string& regex) {
+	// passing -1 as the submatch index parameter performs splitting
+	std::regex re(regex);
+	std::sregex_token_iterator
+		first{ input.begin(), input.end(), re, -1 },
+		last;
+	return { first, last };
+}
+
+//point* PointsToMass() 
+vector<point> PointsToMass() 
 {
 	
-	point* points;
-	string line;
-	ifstream in("C:\\Users\\Александр\source\repos\panelizer\panelizer\\data.txt");
-	while (getline(in, line))
-	{
-		
-	}
+	vector<point> points;
+
+	string line = "";
+	ifstream in(path); // окрываем файл для чтения
 	
+	cout << in.is_open() << endl;
+
+	if (in.is_open())
+	{
+		while (getline(in, line))
+		{
+			cout << line << endl;
+			vector<string> spt = split(line, " ");
+			if (spt.size() == 2) {
+				//cout << "First " << spt[0] << " Second " << spt[1] << endl;
+				points.push_back(point(atof(spt[0].c_str()), atof(spt[1].c_str()))); 
+			}
+		}
+	}
+	in.close();
+
+	return points;
+	//in.close();
 }
 
 int main()
@@ -59,7 +91,10 @@ int main()
     cout << "Hello World!\n";
 	cout << testpanel.getCenter().y << endl;
 	
-
+	vector<point> points = PointsToMass();
+	for (int i = 0; i < points.size(); i++) {
+		cout << points.at(i).x << " " << points.at(i).y << endl;
+	}
 	//cout << panels[100].getCenter().y << endl;
 
 }
