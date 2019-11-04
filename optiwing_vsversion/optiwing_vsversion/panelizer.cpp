@@ -13,6 +13,9 @@
 using namespace std;
 
 const char* path = "C:\\Users\\Александр\\source\\repos\\panelizer\\panelizer\\data.txt";
+const char* path1 = "C:\\Users\\Александр\\source\\repos\\panelizer\\panelizer\\AG24.txt";
+const char* path2 = "C:\\Users\\Александр\\source\\repos\\panelizer\\panelizer\\NASA6412.txt";
+
 
 //Карелин 19.04: Реализовать чтение из файла массива точек для создания экземпляра
 //класса airfoil + проверка замкнутости (и другие методы)
@@ -85,18 +88,25 @@ vector<point> PointsToMass()
 int main()
 {
 	
-	point p1 = point(0.0, 0.0);
+	/*point p1 = point(0.0, 0.0);
 	point p2 = point(1.0, 2.0);
 	panel testpanel = panel(p1, p2);
     cout << "Hello World!\n";
 	cout << testpanel.getCenter().y << endl;
 	
-	vector<point> points = PointsToMass();
+	
 	for (int i = 0; i < points.size(); i++) {
 		cout << points.at(i).x << " " << points.at(i).y << endl;
-	}
-	//cout << panels[100].getCenter().y << endl;
+	}*/
+	vector<point> points = PointsToMass();
+	vector <panel> panels (points.size-1);
+	for (int i = 0; i < panels.size(); i++) {
+		panels.at(i).left = points.at(i);
+		panels.at(i).right = points.at(i + 1);
+	
 
+	}
+	
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
